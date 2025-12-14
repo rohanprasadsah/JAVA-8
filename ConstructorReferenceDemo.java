@@ -1,4 +1,7 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class ConstructorReferenceDemo {
     public static void main(String[] args) {
@@ -9,6 +12,12 @@ public class ConstructorReferenceDemo {
 
         Supplier<Majdoor> s2=Majdoor::new;
         System.out.println(s2.get().getName());
+
+        System.out.println("-----------------");
+
+        List<String> l=Arrays.asList("Rit","Mit","Hit");
+        List<Majdoor> newList = l.stream().map(Majdoor::new).collect(Collectors.toList());
+        System.out.println(newList);
     }
 }
 
