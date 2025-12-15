@@ -97,5 +97,30 @@ public class StreamDemo {
         
         boolean noneMatch=Arrays.asList(1,2,3,4,5,6,7,8,9,10).stream().noneMatch(x->x%55==0);
         System.out.println("noneMatch : "+noneMatch);
+
+        //flatMap()
+        List<List<String>> listo = Arrays.asList(Arrays.asList("apple","banana"), Arrays.asList("kiwi","pomegranate"), Arrays.asList("orange","mango"));
+        String[] listoArr = listo.stream().flatMap(x->x.stream()).map(String::toUpperCase).toArray(String[]::new);
+        System.out.println(Arrays.toString(listoArr));
+
+        List<String> listo2 = Arrays.asList("Hello World","JAVA Streams are powerful", "flatMap() is useful");
+        String[] listo2Arr = listo2.stream().flatMap(x->Arrays.stream(x.split(" "))).toArray(String[]::new);
+        System.out.println(Arrays.toString(listo2Arr));
+
+        System.out.println("-----------------");
+        
+        //forEachOrdered() -> the forEachOrdered() method is similar to forEach(), but it guarantees that elements are processed in the same order as they appear in the stream even we are using parallel stream.
+        List<Integer> asList = Arrays.asList(1,2,3,4,5);
+        System.out.println("forEach() with parallel stream : ");
+        asList.parallelStream().forEach(System.out::println);
+        System.out.println("forEachOrdered() with parallel stream : ");
+        asList.parallelStream().forEachOrdered(System.out::println);
+
+        System.out.println("-----------------");
+
+        //Streams cannot be reused after a terminal operation is applied.
+        Stream<String> streeeeam = Arrays.asList("Check", "it", "will", "give", "llegalStateException").stream();
+        streeeeam.forEach(System.out::println);
+        List<String> list2 = streeeeam.map(String::toUpperCase).toList();
     }
 }
